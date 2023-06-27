@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+ body {
+        font-family: Arial, sans-serif, bold;
+    }
+
+  #container {
+    position: relative;
+    width: 1550px;
+    height:762px;
+    
+    background-color:  none;
+    border: 0px !important none;
+  }
+  .crosshair-line {
+    position: absolute;
+    background-color:#73FDFF;
+  }
+  #coordinates {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 10px;
+    margin-top: 56px;
+    color: white;
+    font-size: 28px;
+    border: 2px solid white;
+    width: 550px;
+    height: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div id="container" onmousemove="moveCrosshair(event)" onclick="toggleCrosshairLock()">
+  <div id="crosshair-horizontal" class="crosshair-line" style="height: 1px; width: 100%;"></div>
+  <div id="crosshair-vertical" class="crosshair-line" style="width: 1px; height: 100%;"></div>
+</div>
+<p id="coordinates"></p>
+
+<script>
+let crosshairLocked = false;
+
+function moveCrosshair(event) {
+  if (!crosshairLocked) {
+    const container = document.getElementById('container');
+    const crosshairHorizontal = document.getElementById('crosshair-horizontal');
+    const crosshairVertical = document.getElementById('crosshair-vertical');
+    const coordinates = document.getElementById('coordinates');
+
+    const xScale = [270, 320];
+    const yScale = [-20.03, 4];
+
+    const x = event.clientX - container.offsetLeft;
+    const y = event.clientY - container.offsetTop;
+
+    crosshairHorizontal.style.top = y + 'px';
+    crosshairVertical.style.left = x + 'px';
+
+    const xCoord = xScale[0] + (x / container.clientWidth) * (xScale[1] - xScale[0]);
+    const yCoord = yScale[0] + (1 - y / container.clientHeight) * (yScale[1] - yScale[0]);
+
+    coordinates.innerText = `Longitude: ${xCoord.toFixed(2)}, Latitude: ${yCoord.toFixed(2)}`;
+  }
+}
+
+function toggleCrosshairLock() {
+  crosshairLocked = !crosshairLocked;
+}
+</script>
+
+</body>
+</html>
+

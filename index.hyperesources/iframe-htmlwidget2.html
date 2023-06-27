@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.accordion {
+  background-color: transparent;
+  color: #e5e7ee;
+  cursor: pointer;
+  padding: 10px;
+  width: 250px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  transition: 0.4s;
+  border-top: 2px solid #6a7496;
+  overflow: hidden;
+}
+
+.active, .accordion:hover {
+  background-color:#4C72C5; 
+  padding: 15px;
+  width: 250px;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #c4c4cf;
+  font-weight: bold;
+  float: right;
+  margin-left: 12px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding:0 10px;
+  background-color: #081728;
+  color: white;
+  font-family: Arial;
+  text-align: left;
+  max-height: 0px;
+  max-width: 250px;
+  overflow: hidden;
+  transition: max-height 0.1s ease-out;
+}
+</style>
+</head>
+<body>
+
+
+
+<button class="accordion">Baetis Chasma</button>
+<div class="panel">
+  <p>-4.29°N, 295.13°E</p>
+</div>
+
+<button class="accordion">Ceti Chasma</button>
+<div class="panel">
+  <p>-5.01°N, 291.61°E</p>
+</div>
+
+<button class="accordion">Coprates Catena</button>
+<div class="panel">
+  <p>-15°N, 297.91°E</p>
+</div>
+
+<button class="accordion">Ganges Catena</button>
+<div class="panel">
+  <p>-2.70°N, 291.22°E</p>
+</div>
+
+<button class="accordion">Ganges Cavus</button>
+<div class="panel">
+  <p>-10.09°N, 308.55°E</p>
+</div>
+<button class="accordion">Geryon Montes</button>
+<div class="panel">
+  <p>-7.69°N, 278.41°E</p>
+</div>
+
+<button class="accordion">Nectaris Montes</button>
+<div class="panel">
+  <p>-14.63°N, 305.35°E</p>
+</div>
+
+<button class="accordion">Perriton Crater</button>
+<div class="panel">
+  <p>-2.82°N, 282.06°E</p>
+</div>
+
+<button class="accordion">Pital Crater</button>
+<div class="panel">
+  <p>-9.27°N, 297.72°E</p>
+</div>
+
+
+<button class="accordion">Saravan Crater</button>
+<div class="panel">
+  <p>-16.93°N, 305.98°E</p>
+</div>
+
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+  
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      var panel = this.nextElementSibling;
+      
+      // loop through all accordion elements and close their panels
+      for (j = 0; j < acc.length; j++) {
+        if (acc[j] != this) {
+          acc[j].classList.remove("active");
+          var otherPanel = acc[j].nextElementSibling;
+          otherPanel.style.maxHeight = null;
+        }
+      }
+      
+      this.classList.toggle("active");
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      } 
+    });
+  }
+  </script>
+
+</body>
+</html>
